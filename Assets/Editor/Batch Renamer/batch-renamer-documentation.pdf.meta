@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: dabba0d150d528d4ebe25110efb948dd
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 246822
+  packageName: Batch Renamer
+  packageVersion: 1.0
+  assetPath: Assets/Editor/Batch Renamer/batch-renamer-documentation.pdf
+  uploadId: 564272
