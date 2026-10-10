@@ -41,19 +41,19 @@ public class InputSystem : MonoBehaviour
 
         if (Keyboard.current.wKey.isPressed || Keyboard.current.upArrowKey.isPressed)
         {
-            movementDirection += Vector3.forward;
+            movementDirection -= Vector3.forward;
         }
         if (Keyboard.current.sKey.isPressed || Keyboard.current.downArrowKey.isPressed)
         {
-            movementDirection += Vector3.back;
+            movementDirection -= Vector3.back;
         }
         if (Keyboard.current.aKey.isPressed || Keyboard.current.leftArrowKey.isPressed)
         {
-            movementDirection += Vector3.left;
+            movementDirection -= Vector3.left;
         }
         if (Keyboard.current.dKey.isPressed || Keyboard.current.rightArrowKey.isPressed)
         {
-            movementDirection += Vector3.right;
+            movementDirection -= Vector3.right;
         }
 
         transform.position += movementDirection * playerMovementSpeed * Time.deltaTime;

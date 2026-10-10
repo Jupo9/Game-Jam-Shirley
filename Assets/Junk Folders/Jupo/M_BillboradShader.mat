@@ -59,7 +59,7 @@ Material:
     - _QueueOffset: 0
     m_Colors:
     - _Basecolor: {r: 0.13668923, g: 0.735849, b: 0.12842648, a: 1}
-    - _GrassCameraPositionWS: {r: 0.5553777, g: 5.841, b: -12.475864, a: 0}
+    - _GrassCameraPositionWS: {r: -5.316404, g: 5.841, b: -13.803712, a: 0}
     - _Main_Camera_Position: {r: 0, g: 0, b: 0, a: 0}
     - _Object_UP: {r: 0, g: 1, b: 0, a: 0}
     - _Shadow: {r: 0.25231397, g: 0.32689616, b: 0.39622638, a: 1}
