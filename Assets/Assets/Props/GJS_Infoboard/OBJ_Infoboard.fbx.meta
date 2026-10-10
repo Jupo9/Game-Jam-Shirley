@@ -3,9 +3,14 @@ guid: 423220372be94f3459c6934a6bef17f2
 ModelImporter:
   serializedVersion: 24300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Infoboard
+    second: {fileID: 2100000, guid: 64d460bc3c743a542bdb833bd309f70b, type: 2}
   materials:
-    materialImportMode: 0
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 1

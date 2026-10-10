@@ -38,10 +38,10 @@ Material:
     m_Ints: []
     m_Floats:
     - _Depth_Difference: 0.5
-    - _Outline_Thickness: 1.5
+    - _Outline_Thickness: 1.41
     - _Outline_Thickness_Variation: 0.5
     - _Outline_Wiggle: 0.2
     m_Colors:
-    - _Outline_Color: {r: 0, g: 0, b: 0, a: 0}
+    - _Outline_Color: {r: 0.0754717, g: 0.07297971, b: 0.06799573, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
