@@ -5,46 +5,48 @@ using UnityEngine;
 [AddComponentMenu("Game/Day Schedule")]
 public class DaySchedule : MonoBehaviour
 {
-    [SerializeField] private List<PersonDefinition> people = new();
+    [SerializeField] private List<NeighborDefinition> neighbors = new();
     [SerializeField] private List<TimeSlotDefinition> timeSlots = new();
     [SerializeField] private List<DayData> days = new();
 
-    public IReadOnlyList<PersonDefinition> People => people;
+    public IReadOnlyList<NeighborDefinition> Neighbor => neighbors;
     public IReadOnlyList<TimeSlotDefinition> TimeSlots => timeSlots;
     public IReadOnlyList<DayData> Days => days;
 
-
     // =========================================================
-    // PERSONS
+    // NEIGHBORS
     // =========================================================
 
-    public void AddPerson()
+    public void AddNeighbor()
     {
-        string defaultName = "Person " + (people.Count + 1);
+        string defaultName = "Neighbor " + (neighbors.Count + 1);
 
-        people.Add(new PersonDefinition(defaultName));
+        neighbors.Add(new NeighborDefinition(defaultName));
 
         EnsureDataIntegrity();
     }
 
-    public void RemovePersonAt(int index)
+    public void RemoveNeighborAt(int index)
     {
-        if (index < 0 || index >= people.Count)
+        if (index < 0 || index >= neighbors.Count)
+        {
             return;
+        }
 
-        people.RemoveAt(index);
+        neighbors.RemoveAt(index);
 
         EnsureDataIntegrity();
     }
 
-    public void RenamePerson(int index, string newName)
+    public void RenameNeighbor(int index, string newName)
     {
-        if (index < 0 || index >= people.Count)
+        if (index < 0 || index >= neighbors.Count)
+        { 
             return;
+        }
 
-        people[index].Name = newName;
+        neighbors[index].Name = newName;
     }
-
 
     // =========================================================
     // TIMESLOTS
@@ -62,7 +64,9 @@ public class DaySchedule : MonoBehaviour
     public void RemoveLastTimeSlot()
     {
         if (timeSlots.Count == 0)
+        { 
             return;
+        }
 
         timeSlots.RemoveAt(timeSlots.Count - 1);
 
@@ -72,11 +76,12 @@ public class DaySchedule : MonoBehaviour
     public void RenameTimeSlot(int index, string newName)
     {
         if (index < 0 || index >= timeSlots.Count)
+        { 
             return;
+        }
 
         timeSlots[index].Name = newName;
     }
-
 
     // =========================================================
     // DAYS
@@ -94,7 +99,9 @@ public class DaySchedule : MonoBehaviour
     public void RemoveDayAt(int index)
     {
         if (index < 0 || index >= days.Count)
+        { 
             return;
+        }
 
         days.RemoveAt(index);
     }
@@ -102,95 +109,97 @@ public class DaySchedule : MonoBehaviour
     public void RenameDay(int index, string newName)
     {
         if (index < 0 || index >= days.Count)
+        { 
             return;
+        }
 
         days[index].Name = newName;
     }
-
 
     // =========================================================
     // OCCUPIED / FREE
     // =========================================================
 
-    public bool IsOccupied(
-        int dayIndex,
-        int personIndex,
-        int timeSlotIndex)
+    public bool IsOccupied(int dayIndex, int neighborIndex, int timeSlotIndex)
     {
-        if (!AreIndicesValid(dayIndex, personIndex, timeSlotIndex))
+        if (!AreIndicesValid(dayIndex, neighborIndex, timeSlotIndex))
+        { 
             return false;
+        }
 
-        string personID = people[personIndex].ID;
+        string neighborID = neighbors[neighborIndex].ID;
         string timeSlotID = timeSlots[timeSlotIndex].ID;
 
-        PersonDayData personData =
-            days[dayIndex].FindPerson(personID);
+        NeighborDayData neighborData = days[dayIndex].FindNeighbor(neighborID);
 
-        if (personData == null)
+        if (neighborData == null)
+        { 
             return false;
+        }
 
-        SlotState slotState =
-            personData.FindSlot(timeSlotID);
+        SlotState slotState = neighborData.FindSlot(timeSlotID);
 
         if (slotState == null)
+        { 
             return false;
+        }
 
         return slotState.Occupied;
     }
 
-    public void ToggleOccupied(
-        int dayIndex,
-        int personIndex,
-        int timeSlotIndex)
+    public void ToggleOccupied(int dayIndex, int neighborIndex, int timeSlotIndex)
     {
-        if (!AreIndicesValid(dayIndex, personIndex, timeSlotIndex))
+        if (!AreIndicesValid(dayIndex, neighborIndex, timeSlotIndex))
+        { 
             return;
+        }
 
-        string personID = people[personIndex].ID;
+        string neighborID = neighbors[neighborIndex].ID;
         string timeSlotID = timeSlots[timeSlotIndex].ID;
 
-        PersonDayData personData =
-            days[dayIndex].FindPerson(personID);
+        NeighborDayData neighborData = days[dayIndex].FindNeighbor(neighborID);
 
-        if (personData == null)
+        if (neighborData == null)
+        {
             return;
+        }
 
-        SlotState slotState =
-            personData.FindSlot(timeSlotID);
+        SlotState slotState = neighborData.FindSlot(timeSlotID);
 
         if (slotState == null)
+        {
             return;
+        }
 
         slotState.Occupied = !slotState.Occupied;
     }
 
-    public void SetOccupied(
-        int dayIndex,
-        int personIndex,
-        int timeSlotIndex,
-        bool occupied)
+    public void SetOccupied(int dayIndex, int neighborIndex, int timeSlotIndex, bool occupied)
     {
-        if (!AreIndicesValid(dayIndex, personIndex, timeSlotIndex))
+        if (!AreIndicesValid(dayIndex, neighborIndex, timeSlotIndex))
+        {
             return;
+        }
 
-        string personID = people[personIndex].ID;
+        string neighborID = neighbors[neighborIndex].ID;
         string timeSlotID = timeSlots[timeSlotIndex].ID;
 
-        PersonDayData personData =
-            days[dayIndex].FindPerson(personID);
+        NeighborDayData neighborData = days[dayIndex].FindNeighbor(neighborID);
 
-        if (personData == null)
+        if (neighborData == null)
+        {
             return;
+        }
 
-        SlotState slotState =
-            personData.FindSlot(timeSlotID);
+        SlotState slotState = neighborData.FindSlot(timeSlotID);
 
         if (slotState == null)
+        {
             return;
+        }
 
         slotState.Occupied = occupied;
     }
-
 
     // =========================================================
     // DATA SYNCHRONIZATION
@@ -202,15 +211,15 @@ public class DaySchedule : MonoBehaviour
 
         foreach (DayData day in days)
         {
-            day.SyncWith(people, timeSlots);
+            day.SyncWith(neighbors, timeSlots);
         }
     }
 
     private void EnsureIDs()
     {
-        foreach (PersonDefinition person in people)
+        foreach (NeighborDefinition neighbor in neighbors)
         {
-            person.EnsureID();
+            neighbor.EnsureID();
         }
 
         foreach (TimeSlotDefinition timeSlot in timeSlots)
@@ -224,19 +233,14 @@ public class DaySchedule : MonoBehaviour
         }
     }
 
-    private bool AreIndicesValid(
-        int dayIndex,
-        int personIndex,
-        int timeSlotIndex)
+    private bool AreIndicesValid(int dayIndex, int neighborIndex, int timeSlotIndex)
     {
-        if (dayIndex < 0 || dayIndex >= days.Count)
+        if (dayIndex < 0 || dayIndex >= days.Count ||
+            neighborIndex < 0 || neighborIndex >= neighbors.Count ||
+            timeSlotIndex < 0 || timeSlotIndex >= timeSlots.Count)
+        { 
             return false;
-
-        if (personIndex < 0 || personIndex >= people.Count)
-            return false;
-
-        if (timeSlotIndex < 0 || timeSlotIndex >= timeSlots.Count)
-            return false;
+        }
 
         return true;
     }
@@ -247,29 +251,28 @@ public class DaySchedule : MonoBehaviour
     }
 }
 
-
 // =============================================================
-// PERSON DEFINITION
+// Neighbor DEFINITION
 // =============================================================
 
 [Serializable]
-public class PersonDefinition
+public class NeighborDefinition
 {
     [SerializeField] private string id;
-    [SerializeField] private string personName;
+    [SerializeField] private string neighborName;
 
     public string ID => id;
 
     public string Name
     {
-        get => personName;
-        set => personName = value;
+        get => neighborName;
+        set => neighborName = value;
     }
 
-    public PersonDefinition(string name)
+    public NeighborDefinition(string name)
     {
         id = Guid.NewGuid().ToString();
-        personName = name;
+        neighborName = name;
     }
 
     public void EnsureID()
@@ -280,7 +283,6 @@ public class PersonDefinition
         }
     }
 }
-
 
 // =============================================================
 // TIMESLOT DEFINITION
@@ -315,7 +317,6 @@ public class TimeSlotDefinition
     }
 }
 
-
 // =============================================================
 // DAY
 // =============================================================
@@ -326,8 +327,7 @@ public class DayData
     [SerializeField] private string id;
     [SerializeField] private string dayName;
 
-    [SerializeField]
-    private List<PersonDayData> persons = new();
+    [SerializeField] private List<NeighborDayData> neighbors = new();
 
     public string ID => id;
 
@@ -351,85 +351,73 @@ public class DayData
         }
     }
 
-    public PersonDayData FindPerson(string personID)
+    public NeighborDayData FindNeighbor(string neighborID)
     {
-        return persons.Find(
-            person => person.PersonID == personID
-        );
+        return neighbors.Find(neighbor => neighbor.NeighborID == neighborID);
     }
 
-    public void SyncWith(
-        IReadOnlyList<PersonDefinition> globalPeople,
-        IReadOnlyList<TimeSlotDefinition> globalTimeSlots)
+    public void SyncWith(IReadOnlyList<NeighborDefinition> globalNeighbor, IReadOnlyList<TimeSlotDefinition> globalTimeSlots)
     {
-        // Remove persons that no longer exist
-        for (int i = persons.Count - 1; i >= 0; i--)
+        // Remove Neighbor that no longer exist
+        for (int i = neighbors.Count - 1; i >= 0; i--)
         {
-            bool personStillExists = false;
+            bool neighborStillExists = false;
 
-            foreach (PersonDefinition person in globalPeople)
+            foreach (NeighborDefinition neighbor in globalNeighbor)
             {
-                if (person.ID == persons[i].PersonID)
+                if (neighbor.ID == neighbors[i].NeighborID)
                 {
-                    personStillExists = true;
+                    neighborStillExists = true;
                     break;
                 }
             }
 
-            if (!personStillExists)
+            if (!neighborStillExists)
             {
-                persons.RemoveAt(i);
+                neighbors.RemoveAt(i);
             }
         }
 
-        // Add missing persons
-        foreach (PersonDefinition person in globalPeople)
+        // Add missing Neighbor
+        foreach (NeighborDefinition neighbor in globalNeighbor)
         {
-            PersonDayData personData =
-                FindPerson(person.ID);
+            NeighborDayData neighborData = FindNeighbor(neighbor.ID);
 
-            if (personData == null)
+            if (neighborData == null)
             {
-                personData =
-                    new PersonDayData(person.ID);
+                neighborData = new NeighborDayData(neighbor.ID);
 
-                persons.Add(personData);
+                neighbors.Add(neighborData);
             }
 
-            personData.SyncTimeSlots(globalTimeSlots);
+            neighborData.SyncTimeSlots(globalTimeSlots);
         }
     }
 }
 
-
 // =============================================================
-// PERSON DATA INSIDE A DAY
+// NEIGHBOR DATA INSIDE A DAY
 // =============================================================
 
 [Serializable]
-public class PersonDayData
+public class NeighborDayData
 {
-    [SerializeField] private string personID;
+    [SerializeField] private string neighborID;
+    [SerializeField] private List<SlotState> slots = new();
 
-    [SerializeField]
-    private List<SlotState> slots = new();
+    public string NeighborID => neighborID;
 
-    public string PersonID => personID;
-
-    public PersonDayData(string id)
+    public NeighborDayData(string id)
     {
-        personID = id;
+        neighborID = id;
     }
 
     public SlotState FindSlot(string timeSlotID)
     {
-        return slots.Find(
-            slot => slot.TimeSlotID == timeSlotID
-        );
+        return slots.Find(slot => slot.TimeSlotID == timeSlotID);
     }
 
-    public void SyncTimeSlots(
-        IReadOnlyList<TimeSlotDefinition> globalTimeSlots)
+    public void SyncTimeSlots(IReadOnlyList<TimeSlotDefinition> globalTimeSlots)
     {
         // Remove deleted timeslots
         for (int i = slots.Count - 1; i >= 0; i--)
@@ -456,14 +444,11 @@ public class PersonDayData
         {
             if (FindSlot(timeSlot.ID) == null)
             {
-                slots.Add(
-                    new SlotState(timeSlot.ID)
-                );
+                slots.Add( new SlotState(timeSlot.ID));
             }
         }
     }
 }
-
 
 // =============================================================
 // SINGLE SLOT STATE

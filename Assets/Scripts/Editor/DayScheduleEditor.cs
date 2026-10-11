@@ -8,10 +8,9 @@ public class DayScheduleEditor : Editor
 {
     private DaySchedule schedule;
 
-    private readonly Dictionary<string, Vector2> dayScrollPositions =
-        new Dictionary<string, Vector2>();
+    private readonly Dictionary<string, Vector2> dayScrollPositions = new Dictionary<string, Vector2>();
 
-    private const float PersonColumnWidth = 130f;
+    private const float NeighborColumnWidth = 130f;
     private const float SlotWidth = 70f;
     private const float RowHeight = 24f;
 
@@ -25,9 +24,11 @@ public class DayScheduleEditor : Editor
     public override void OnInspectorGUI()
     {
         if (schedule == null)
+        { 
             return;
+        }
 
-        DrawPeopleSection();
+        DrawNeighborSection();
 
         EditorGUILayout.Space(10);
 
@@ -42,49 +43,36 @@ public class DayScheduleEditor : Editor
         DrawAddDayButton();
     }
 
-
     // =========================================================
-    // PEOPLE
+    // NEIGHBORS
     // =========================================================
 
-    private void DrawPeopleSection()
+    private void DrawNeighborSection()
     {
-        EditorGUILayout.LabelField(
-            "People",
-            EditorStyles.boldLabel
-        );
-
+        EditorGUILayout.LabelField("Neighbors", EditorStyles.boldLabel);
         EditorGUILayout.BeginVertical("box");
 
-        for (int i = 0; i < schedule.People.Count; i++)
+        for (int i = 0; i < schedule.Neighbor.Count; i++)
         {
             EditorGUILayout.BeginHorizontal();
 
-            string oldName =
-                schedule.People[i].Name;
-
-            string newName =
-                EditorGUILayout.TextField(oldName);
+            string oldName = schedule.Neighbor[i].Name;
+            string newName = EditorGUILayout.TextField(oldName);
 
             if (newName != oldName)
             {
-                RecordUndo("Rename Person");
+                RecordUndo("Rename Neighbor");
 
-                schedule.RenamePerson(
-                    i,
-                    newName
-                );
+                schedule.RenameNeighbor(i, newName);
 
                 MarkDirty();
             }
 
-            if (GUILayout.Button(
-                "-",
-                GUILayout.Width(30)))
+            if (GUILayout.Button("-", GUILayout.Width(30)))
             {
-                RecordUndo("Remove Person");
+                RecordUndo("Remove Neighbor");
 
-                schedule.RemovePersonAt(i);
+                schedule.RemoveNeighborAt(i);
 
                 MarkDirty();
 
@@ -99,18 +87,17 @@ public class DayScheduleEditor : Editor
             EditorGUILayout.EndHorizontal();
         }
 
-        if (GUILayout.Button("+ Add Person"))
+        if (GUILayout.Button("+ Add Neighbor"))
         {
-            RecordUndo("Add Person");
+            RecordUndo("Add Neighbor");
 
-            schedule.AddPerson();
+            schedule.AddNeighbor();
 
             MarkDirty();
         }
 
         EditorGUILayout.EndVertical();
     }
-
 
     // =========================================================
     // TIMESLOTS
@@ -119,15 +106,9 @@ public class DayScheduleEditor : Editor
     private void DrawTimeSlotSection()
     {
         EditorGUILayout.BeginHorizontal();
+        EditorGUILayout.LabelField("Global Timeslots", EditorStyles.boldLabel);
 
-        EditorGUILayout.LabelField(
-            "Global Timeslots",
-            EditorStyles.boldLabel
-        );
-
-        if (GUILayout.Button(
-            "+",
-            GUILayout.Width(30)))
+        if (GUILayout.Button("+", GUILayout.Width(30)))
         {
             RecordUndo("Add Timeslot");
 
@@ -136,12 +117,9 @@ public class DayScheduleEditor : Editor
             MarkDirty();
         }
 
-        GUI.enabled =
-            schedule.TimeSlots.Count > 0;
+        GUI.enabled = schedule.TimeSlots.Count > 0;
 
-        if (GUILayout.Button(
-            "-",
-            GUILayout.Width(30)))
+        if (GUILayout.Button("-", GUILayout.Width(30)))
         {
             RecordUndo("Remove Timeslot");
 
@@ -155,40 +133,26 @@ public class DayScheduleEditor : Editor
         GUI.enabled = true;
 
         EditorGUILayout.EndHorizontal();
-
         EditorGUILayout.BeginVertical("box");
 
         if (schedule.TimeSlots.Count == 0)
         {
-            EditorGUILayout.HelpBox(
-                "No timeslots created yet. Press + to create one.",
-                MessageType.Info
-            );
+            EditorGUILayout.HelpBox("No timeslots created yet. Press + to create one.", MessageType.Info);
         }
 
         for (int i = 0; i < schedule.TimeSlots.Count; i++)
         {
             EditorGUILayout.BeginHorizontal();
+            EditorGUILayout.LabelField("Slot " + (i + 1), GUILayout.Width(60));
 
-            EditorGUILayout.LabelField(
-                "Slot " + (i + 1),
-                GUILayout.Width(60)
-            );
-
-            string oldName =
-                schedule.TimeSlots[i].Name;
-
-            string newName =
-                EditorGUILayout.TextField(oldName);
+            string oldName = schedule.TimeSlots[i].Name;
+            string newName = EditorGUILayout.TextField(oldName);
 
             if (newName != oldName)
             {
                 RecordUndo("Rename Timeslot");
 
-                schedule.RenameTimeSlot(
-                    i,
-                    newName
-                );
+                schedule.RenameTimeSlot(i, newName);
 
                 MarkDirty();
             }
@@ -199,31 +163,22 @@ public class DayScheduleEditor : Editor
         EditorGUILayout.EndVertical();
     }
 
-
     // =========================================================
     // DAYS
     // =========================================================
 
     private void DrawDays()
     {
-        EditorGUILayout.LabelField(
-            "Days",
-            EditorStyles.boldLabel
-        );
+        EditorGUILayout.LabelField("Days", EditorStyles.boldLabel);
 
         if (schedule.Days.Count == 0)
         {
-            EditorGUILayout.HelpBox(
-                "No days created yet.",
-                MessageType.Info
-            );
+            EditorGUILayout.HelpBox("No days created yet.",MessageType.Info);
 
             return;
         }
 
-        for (int dayIndex = 0;
-             dayIndex < schedule.Days.Count;
-             dayIndex++)
+        for (int dayIndex = 0; dayIndex < schedule.Days.Count;dayIndex++)
         {
             DrawDay(dayIndex);
 
@@ -233,25 +188,17 @@ public class DayScheduleEditor : Editor
 
     private void DrawDay(int dayIndex)
     {
-        DayData day =
-            schedule.Days[dayIndex];
+        DayData day = schedule.Days[dayIndex];
 
         EditorGUILayout.BeginVertical("box");
 
-        DrawDayHeader(
-            dayIndex,
-            day
-        );
+        DrawDayHeader(dayIndex, day);
 
         EditorGUILayout.Space(5);
 
-        if (schedule.People.Count == 0)
+        if (schedule.Neighbor.Count == 0)
         {
-            EditorGUILayout.HelpBox(
-                "Add at least one person.",
-                MessageType.Info
-            );
-
+            EditorGUILayout.HelpBox("Add at least one Neighbor.", MessageType.Info);
             EditorGUILayout.EndVertical();
 
             return;
@@ -259,60 +206,38 @@ public class DayScheduleEditor : Editor
 
         if (schedule.TimeSlots.Count == 0)
         {
-            EditorGUILayout.HelpBox(
-                "Add at least one timeslot.",
-                MessageType.Info
-            );
+            EditorGUILayout.HelpBox("Add at least one timeslot.", MessageType.Info);
 
             EditorGUILayout.EndVertical();
 
             return;
         }
 
-        DrawScheduleGrid(
-            dayIndex,
-            day
-        );
+        DrawScheduleGrid(dayIndex, day);
 
         EditorGUILayout.EndVertical();
     }
 
-
-    private void DrawDayHeader(
-        int dayIndex,
-        DayData day)
+    private void DrawDayHeader(int dayIndex,DayData day)
     {
         EditorGUILayout.BeginHorizontal();
+        EditorGUILayout.LabelField("DAY", EditorStyles.boldLabel, GUILayout.Width(40));
 
-        EditorGUILayout.LabelField(
-            "DAY",
-            EditorStyles.boldLabel,
-            GUILayout.Width(40)
-        );
-
-        string oldName =
-            day.Name;
-
-        string newName =
-            EditorGUILayout.TextField(oldName);
+        string oldName = day.Name;
+        string newName = EditorGUILayout.TextField(oldName);
 
         if (newName != oldName)
         {
             RecordUndo("Rename Day");
 
-            schedule.RenameDay(
-                dayIndex,
-                newName
-            );
+            schedule.RenameDay(dayIndex, newName);
 
             MarkDirty();
         }
 
         GUILayout.FlexibleSpace();
 
-        if (GUILayout.Button(
-            "Delete Day",
-            GUILayout.Width(90)))
+        if (GUILayout.Button("Delete Day", GUILayout.Width(90)))
         {
             RecordUndo("Delete Day");
 
@@ -331,153 +256,79 @@ public class DayScheduleEditor : Editor
         EditorGUILayout.EndHorizontal();
     }
 
-
     // =========================================================
     // GRID
     // =========================================================
 
-    private void DrawScheduleGrid(
-        int dayIndex,
-        DayData day)
+    private void DrawScheduleGrid(int dayIndex, DayData day)
     {
-        Vector2 scrollPosition =
-            GetScrollPosition(day.ID);
+        Vector2 scrollPosition = GetScrollPosition(day.ID);
 
-        float contentWidth =
-            PersonColumnWidth +
-            schedule.TimeSlots.Count * SlotWidth +
-            20f;
+        float contentWidth = NeighborColumnWidth + schedule.TimeSlots.Count * SlotWidth + 20f;
+        float contentHeight = (schedule.Neighbor.Count + 1) * RowHeight + 15f;
 
-        float contentHeight =
-            (schedule.People.Count + 1)
-            * RowHeight
-            + 15f;
+        scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition, true, false,
+                         GUILayout.Height(Mathf.Min(contentHeight + 20f, 300f)));
 
-        scrollPosition =
-            EditorGUILayout.BeginScrollView(
-                scrollPosition,
-                true,
-                false,
-                GUILayout.Height(
-                    Mathf.Min(
-                        contentHeight + 20f,
-                        300f
-                    )
-                )
-            );
-
-        EditorGUILayout.BeginVertical(
-            GUILayout.Width(contentWidth)
-        );
+        EditorGUILayout.BeginVertical(GUILayout.Width(contentWidth));
 
         DrawTimeSlotHeader();
 
-        for (int personIndex = 0;
-             personIndex < schedule.People.Count;
-             personIndex++)
+        for (int neighborIndex = 0; neighborIndex < schedule.Neighbor.Count; neighborIndex++)
         {
-            DrawPersonRow(
-                dayIndex,
-                personIndex
-            );
+            DrawNeighborRow(dayIndex, neighborIndex);
         }
 
         EditorGUILayout.EndVertical();
-
         EditorGUILayout.EndScrollView();
 
-        dayScrollPositions[day.ID] =
-            scrollPosition;
+        dayScrollPositions[day.ID] = scrollPosition;
     }
-
 
     private void DrawTimeSlotHeader()
     {
         EditorGUILayout.BeginHorizontal();
 
-        GUILayout.Label(
-            "Person",
-            EditorStyles.boldLabel,
-            GUILayout.Width(PersonColumnWidth),
-            GUILayout.Height(RowHeight)
-        );
+        GUILayout.Label("Neighbor", EditorStyles.boldLabel, GUILayout.Width(NeighborColumnWidth), GUILayout.Height(RowHeight));
 
-        foreach (TimeSlotDefinition timeSlot
-                 in schedule.TimeSlots)
+        foreach (TimeSlotDefinition timeSlot in schedule.TimeSlots)
         {
-            GUILayout.Label(
-                timeSlot.Name,
-                EditorStyles.boldLabel,
-                GUILayout.Width(SlotWidth),
-                GUILayout.Height(RowHeight)
-            );
+            GUILayout.Label(timeSlot.Name, EditorStyles.boldLabel, GUILayout.Width(SlotWidth),GUILayout.Height(RowHeight));
         }
 
         EditorGUILayout.EndHorizontal();
     }
 
-
-    private void DrawPersonRow(
-        int dayIndex,
-        int personIndex)
+    private void DrawNeighborRow(int dayIndex, int neighborIndex)
     {
         EditorGUILayout.BeginHorizontal();
 
-        GUILayout.Label(
-            schedule.People[personIndex].Name,
-            GUILayout.Width(PersonColumnWidth),
-            GUILayout.Height(RowHeight)
-        );
+        GUILayout.Label(schedule.Neighbor[neighborIndex].Name, GUILayout.Width(NeighborColumnWidth), GUILayout.Height(RowHeight));
 
-        for (int slotIndex = 0;
-             slotIndex < schedule.TimeSlots.Count;
-             slotIndex++)
+        for (int slotIndex = 0; slotIndex < schedule.TimeSlots.Count; slotIndex++)
         {
-            bool occupied =
-                schedule.IsOccupied(
-                    dayIndex,
-                    personIndex,
-                    slotIndex
-                );
+            bool occupied = schedule.IsOccupied(dayIndex, neighborIndex, slotIndex);
 
-            Color oldBackgroundColor =
-                GUI.backgroundColor;
+            Color oldBackgroundColor = GUI.backgroundColor;
 
-            GUI.backgroundColor =
-                occupied
-                    ? new Color(1f, 0.35f, 0.35f)
-                    : Color.white;
+            GUI.backgroundColor = occupied ? new Color(1f, 0.35f, 0.35f) : Color.white;
 
-            string buttonText =
-                occupied ? "X" : "";
+            string buttonText = occupied ? "X" : "";
 
-            if (GUILayout.Button(
-                buttonText,
-                GUILayout.Width(SlotWidth),
-                GUILayout.Height(RowHeight)))
+            if (GUILayout.Button(buttonText, GUILayout.Width(SlotWidth), GUILayout.Height(RowHeight)))
             {
-                RecordUndo(
-                    occupied
-                        ? "Free Timeslot"
-                        : "Occupy Timeslot"
-                );
+                RecordUndo(occupied ? "Free Timeslot" : "Occupy Timeslot");
 
-                schedule.ToggleOccupied(
-                    dayIndex,
-                    personIndex,
-                    slotIndex
-                );
+                schedule.ToggleOccupied(dayIndex, neighborIndex, slotIndex);
 
                 MarkDirty();
             }
 
-            GUI.backgroundColor =
-                oldBackgroundColor;
+            GUI.backgroundColor = oldBackgroundColor;
         }
 
         EditorGUILayout.EndHorizontal();
     }
-
 
     // =========================================================
     // ADD DAY
@@ -485,9 +336,7 @@ public class DayScheduleEditor : Editor
 
     private void DrawAddDayButton()
     {
-        if (GUILayout.Button(
-            "+ Add Day",
-            GUILayout.Height(30)))
+        if (GUILayout.Button("+ Add Day", GUILayout.Height(30)))
         {
             RecordUndo("Add Day");
 
@@ -497,20 +346,15 @@ public class DayScheduleEditor : Editor
         }
     }
 
-
     // =========================================================
     // HELPERS
     // =========================================================
 
-    private Vector2 GetScrollPosition(
-        string dayID)
+    private Vector2 GetScrollPosition(string dayID)
     {
         if (!dayScrollPositions.ContainsKey(dayID))
         {
-            dayScrollPositions.Add(
-                dayID,
-                Vector2.zero
-            );
+            dayScrollPositions.Add(dayID, Vector2.zero);
         }
 
         return dayScrollPositions[dayID];
@@ -518,10 +362,7 @@ public class DayScheduleEditor : Editor
 
     private void RecordUndo(string actionName)
     {
-        Undo.RecordObject(
-            schedule,
-            actionName
-        );
+        Undo.RecordObject(schedule, actionName);
     }
 
     private void MarkDirty()
@@ -530,17 +371,11 @@ public class DayScheduleEditor : Editor
 
         EditorUtility.SetDirty(schedule);
 
-        PrefabUtility
-            .RecordPrefabInstancePropertyModifications(
-                schedule
-            );
+        PrefabUtility.RecordPrefabInstancePropertyModifications(schedule);
 
-        if (!Application.isPlaying &&
-            schedule.gameObject.scene.IsValid())
+        if (!Application.isPlaying && schedule.gameObject.scene.IsValid())
         {
-            EditorSceneManager.MarkSceneDirty(
-                schedule.gameObject.scene
-            );
+            EditorSceneManager.MarkSceneDirty(schedule.gameObject.scene);
         }
     }
 }
