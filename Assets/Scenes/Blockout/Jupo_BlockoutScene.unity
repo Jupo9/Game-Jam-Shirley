@@ -2339,6 +2339,37 @@ Transform:
   - {fileID: 1833781554}
   m_Father: {fileID: 932117363}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &182083741
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 182083742}
+  m_Layer: 0
+  m_Name: Stalk Position
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &182083742
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 182083741}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 62.19099, y: 4.22, z: 39.56434}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &184072142
 GameObject:
   m_ObjectHideFlags: 0
@@ -4577,6 +4608,211 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8991278645230084326, guid: 1b8e4892f6a1a4048818323c240f10a8, type: 3}
   m_PrefabInstance: {fileID: 270357031}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &271324745
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 271324747}
+  - component: {fileID: 271324746}
+  m_Layer: 0
+  m_Name: Day Schedule Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &271324746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 271324745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e94360c2119b5e84aaadb22159f15c76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DaySchedule
+  neighbors:
+  - id: 072f578c-c722-47f0-a944-2050c9467832
+    neighborName: Matthias
+    active: 1
+    visibleOnBoard: 1
+    flagsInitialized: 1
+  - id: 156c4e2c-8648-4ab8-8897-d55fb585a5db
+    neighborName: Marianne
+    active: 1
+    visibleOnBoard: 0
+    flagsInitialized: 1
+  - id: af94fc77-08c6-49fd-a18f-9f0ee98e5dba
+    neighborName: Mustafa
+    active: 0
+    visibleOnBoard: 0
+    flagsInitialized: 1
+  timeSlots:
+  - id: d477f056-efad-4a5c-8859-24b0b5475141
+    slotName: Morning
+  - id: 28128f61-59b2-4ca4-b472-c1a2f45855ef
+    slotName: Noon
+  - id: 3e9e5bb1-1166-4cb3-ab4b-e3e6a8e0b095
+    slotName: Afternoon
+  - id: c8cf2504-b652-4eee-b96d-10449b744d2c
+    slotName: Evening
+  - id: bcf3f2ee-4dba-49c5-bc76-2af3b6372ff2
+    slotName: Night
+  slotStatus:
+  - id: empty
+    statusName: Empty
+    color: {r: 0.63, g: 0.63, b: 0.63, a: 1}
+    marker: 
+    destinationType: 0
+    sharedTarget: {fileID: 0}
+  - id: garden
+    statusName: Garden
+    color: {r: 0.12130654, g: 0.8867924, b: 0.121323325, a: 1}
+    marker: GARDEN
+    destinationType: 1
+    sharedTarget: {fileID: 0}
+  - id: b9384a35-6882-46b0-815a-2e3ef400c7fd
+    statusName: Patrol
+    color: {r: 0.26, g: 0, b: 48, a: 0.86}
+    marker: PATROL
+    destinationType: 2
+    sharedTarget: {fileID: 1172067006}
+  - id: df3f81b1-1b15-40f2-8593-6724284d6532
+    statusName: Stalk
+    color: {r: 0.7490196, g: 0, b: 0.072367124, a: 0.86}
+    marker: STALK
+    destinationType: 2
+    sharedTarget: {fileID: 182083742}
+  days:
+  - id: c1561e09-e759-4bd4-81b7-bd2d2ad7f0df
+    dayName: Monday
+    neighbors:
+    - neighborID: 072f578c-c722-47f0-a944-2050c9467832
+      slots:
+      - timeSlotID: d477f056-efad-4a5c-8859-24b0b5475141
+        stateID: empty
+        occupied: 0
+      - timeSlotID: 28128f61-59b2-4ca4-b472-c1a2f45855ef
+        stateID: empty
+        occupied: 0
+      - timeSlotID: 3e9e5bb1-1166-4cb3-ab4b-e3e6a8e0b095
+        stateID: garden
+        occupied: 1
+      - timeSlotID: c8cf2504-b652-4eee-b96d-10449b744d2c
+        stateID: garden
+        occupied: 1
+      - timeSlotID: bcf3f2ee-4dba-49c5-bc76-2af3b6372ff2
+        stateID: df3f81b1-1b15-40f2-8593-6724284d6532
+        occupied: 0
+    - neighborID: 156c4e2c-8648-4ab8-8897-d55fb585a5db
+      slots:
+      - timeSlotID: d477f056-efad-4a5c-8859-24b0b5475141
+        stateID: garden
+        occupied: 1
+      - timeSlotID: 28128f61-59b2-4ca4-b472-c1a2f45855ef
+        stateID: garden
+        occupied: 1
+      - timeSlotID: 3e9e5bb1-1166-4cb3-ab4b-e3e6a8e0b095
+        stateID: garden
+        occupied: 1
+      - timeSlotID: c8cf2504-b652-4eee-b96d-10449b744d2c
+        stateID: empty
+        occupied: 0
+      - timeSlotID: bcf3f2ee-4dba-49c5-bc76-2af3b6372ff2
+        stateID: empty
+        occupied: 0
+    - neighborID: af94fc77-08c6-49fd-a18f-9f0ee98e5dba
+      slots:
+      - timeSlotID: d477f056-efad-4a5c-8859-24b0b5475141
+        stateID: empty
+        occupied: 0
+      - timeSlotID: 28128f61-59b2-4ca4-b472-c1a2f45855ef
+        stateID: garden
+        occupied: 1
+      - timeSlotID: 3e9e5bb1-1166-4cb3-ab4b-e3e6a8e0b095
+        stateID: garden
+        occupied: 1
+      - timeSlotID: c8cf2504-b652-4eee-b96d-10449b744d2c
+        stateID: garden
+        occupied: 1
+      - timeSlotID: bcf3f2ee-4dba-49c5-bc76-2af3b6372ff2
+        stateID: empty
+        occupied: 0
+  - id: 8ccd1d85-22a3-44a0-82fc-933f2273bd9a
+    dayName: Tuesday
+    neighbors:
+    - neighborID: 072f578c-c722-47f0-a944-2050c9467832
+      slots:
+      - timeSlotID: d477f056-efad-4a5c-8859-24b0b5475141
+        stateID: garden
+        occupied: 1
+      - timeSlotID: 28128f61-59b2-4ca4-b472-c1a2f45855ef
+        stateID: garden
+        occupied: 1
+      - timeSlotID: 3e9e5bb1-1166-4cb3-ab4b-e3e6a8e0b095
+        stateID: garden
+        occupied: 1
+      - timeSlotID: c8cf2504-b652-4eee-b96d-10449b744d2c
+        stateID: garden
+        occupied: 1
+      - timeSlotID: bcf3f2ee-4dba-49c5-bc76-2af3b6372ff2
+        stateID: df3f81b1-1b15-40f2-8593-6724284d6532
+        occupied: 0
+    - neighborID: 156c4e2c-8648-4ab8-8897-d55fb585a5db
+      slots:
+      - timeSlotID: d477f056-efad-4a5c-8859-24b0b5475141
+        stateID: b9384a35-6882-46b0-815a-2e3ef400c7fd
+        occupied: 0
+      - timeSlotID: 28128f61-59b2-4ca4-b472-c1a2f45855ef
+        stateID: garden
+        occupied: 1
+      - timeSlotID: 3e9e5bb1-1166-4cb3-ab4b-e3e6a8e0b095
+        stateID: garden
+        occupied: 1
+      - timeSlotID: c8cf2504-b652-4eee-b96d-10449b744d2c
+        stateID: b9384a35-6882-46b0-815a-2e3ef400c7fd
+        occupied: 0
+      - timeSlotID: bcf3f2ee-4dba-49c5-bc76-2af3b6372ff2
+        stateID: empty
+        occupied: 0
+    - neighborID: af94fc77-08c6-49fd-a18f-9f0ee98e5dba
+      slots:
+      - timeSlotID: d477f056-efad-4a5c-8859-24b0b5475141
+        stateID: empty
+        occupied: 0
+      - timeSlotID: 28128f61-59b2-4ca4-b472-c1a2f45855ef
+        stateID: garden
+        occupied: 1
+      - timeSlotID: 3e9e5bb1-1166-4cb3-ab4b-e3e6a8e0b095
+        stateID: garden
+        occupied: 1
+      - timeSlotID: c8cf2504-b652-4eee-b96d-10449b744d2c
+        stateID: empty
+        occupied: 0
+      - timeSlotID: bcf3f2ee-4dba-49c5-bc76-2af3b6372ff2
+        stateID: empty
+        occupied: 0
+--- !u!4 &271324747
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 271324745}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &274033609
 GameObject:
   m_ObjectHideFlags: 0
@@ -4809,6 +5045,19 @@ MonoBehaviour:
     slotName: Evening
   - id: 064c6d0b-685b-40c3-ab73-1752b83104b4
     slotName: Night
+  slotStatus:
+  - id: empty
+    statusName: Empty
+    color: {r: 0.63, g: 0.63, b: 0.63, a: 1}
+    marker: 
+    destinationType: 0
+    sharedTarget: {fileID: 0}
+  - id: garden
+    statusName: Garden
+    color: {r: 0.95, g: 0.32, b: 0.32, a: 1}
+    marker: X
+    destinationType: 1
+    sharedTarget: {fileID: 0}
   days:
   - id: 8155bb42-1a6a-4a64-b645-882a23b95879
     dayName: Monday
@@ -10434,8 +10683,8 @@ Transform:
   m_GameObject: {fileID: 595373332}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.8, z: 0}
-  m_LocalScale: {x: 400, y: 10, z: 400}
+  m_LocalPosition: {x: 0, y: 3.7, z: 0}
+  m_LocalScale: {x: 400, y: 1, z: 400}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1327508425}
@@ -20342,6 +20591,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1599385472255000410, guid: dbb148c247cf8fb438c483fbe128648b, type: 3}
   m_PrefabInstance: {fileID: 1171066720}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1172067005
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1172067006}
+  m_Layer: 0
+  m_Name: Patrol Position
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1172067006
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1172067005}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 62.19099, y: 4.22, z: 39.56434}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1173013153
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21084,7 +21364,7 @@ Transform:
   m_GameObject: {fileID: 1210470080}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 23.04, y: 5.24, z: -8.64}
+  m_LocalPosition: {x: 23.04, y: 5.1, z: -8.64}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -32577,69 +32857,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8991278645230084326, guid: 1b8e4892f6a1a4048818323c240f10a8, type: 3}
   m_PrefabInstance: {fileID: 1924082369}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1925086562
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1925086564}
-  - component: {fileID: 1925086563}
-  m_Layer: 0
-  m_Name: Day Schedule
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1925086563
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1925086562}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e94360c2119b5e84aaadb22159f15c76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DaySchedule
-  neighbors: []
-  timeSlots:
-  - id: 8cee7d65-37b9-46b4-a388-385345a9cb87
-    slotName: Slot 1
-  - id: 6f1e694d-e513-49ba-8e6a-afc20dcde985
-    slotName: Slot 2
-  - id: 0b3136b7-1c16-4b6b-804d-059d4f3112d1
-    slotName: Slot 3
-  - id: 55fc2e8d-8d05-4e73-ac1c-1b4afcede5fe
-    slotName: Slot 4
-  - id: 93149f7c-a83d-4d47-9f48-9ee6c13c7a1a
-    slotName: Slot 5
-  days:
-  - id: 756bc26c-5e33-4a10-a198-3bce32cfd6f4
-    dayName: Day 1
-    neighbors: []
-  - id: 07fb5363-9c1b-4704-ab40-6fc4652aad0c
-    dayName: Day 2
-    neighbors: []
---- !u!4 &1925086564
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1925086562}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 4.22, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1928510249
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -33094,6 +33311,66 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3056146368980387851, guid: 304d9d36e301ee945b2b0a51c37aeb22, type: 3}
   m_PrefabInstance: {fileID: 1950795415}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1952093988
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1952093991}
+  - component: {fileID: 1952093990}
+  - component: {fileID: 1952093989}
+  m_Layer: 0
+  m_Name: DayCycleSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1952093989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1952093988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 253f823116941684e95608ee116635fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DayCylcleDebugTool
+  dayCycle: {fileID: 1952093990}
+  showTestButtons: 1
+--- !u!114 &1952093990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1952093988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac5238ea10de0ae41907c23fa9d31f44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DayCycleManager
+  daySchedule: {fileID: 271324746}
+--- !u!4 &1952093991
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1952093988}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1952154102
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -34218,7 +34495,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 170.00002, y: 4.934, z: 0.000003695488}
-  m_LocalScale: {x: 89, y: 1.5, z: 0.79999983}
+  m_LocalScale: {x: 90, y: 1.5, z: 0.79999983}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1574493114}
@@ -36205,15 +36482,18 @@ SceneRoots:
   - {fileID: 582749239}
   - {fileID: 209955147}
   - {fileID: 1145679191}
+  - {fileID: 1210470087}
   - {fileID: 2548055563359490763}
   - {fileID: 1661796826}
   - {fileID: 738947105}
   - {fileID: 1343963698}
   - {fileID: 62861519}
-  - {fileID: 1925086564}
-  - {fileID: 1210470087}
   - {fileID: 767361479}
   - {fileID: 1523662714}
-  - {fileID: 1327508425}
   - {fileID: 535214735}
   - {fileID: 932117363}
+  - {fileID: 271324747}
+  - {fileID: 1952093991}
+  - {fileID: 1172067006}
+  - {fileID: 182083742}
+  - {fileID: 1327508425}
