@@ -314,21 +314,6 @@ public class DaySchedule : MonoBehaviour
         cell.SetStatus(slotStatus[nextIndex].ID);
     }
 
-    /*public bool IsOccupied(int dayIndex, int neighborIndex, int timeSlotIndex)
-    {
-        return GetSlotStatusID(dayIndex, neighborIndex, timeSlotIndex) == GardenStateID;
-    }
-
-    public void ToggleOccupied(int dayIndex, int neighborIndex, int timeSlotIndex)
-    {
-        SetOccupied(dayIndex, neighborIndex, timeSlotIndex, !IsOccupied(dayIndex, neighborIndex, timeSlotIndex));
-    }
-
-    public void SetOccupied(int dayIndex, int neighborIndex, int timeSlotIndex, bool occupied)
-    {
-        SetSlotStatus(dayIndex, neighborIndex, timeSlotIndex, occupied ? GardenStateID : EmptyStateID);
-    }*/
-
     // ==================================================
     // SYNCHRONIZATION
     // ==================================================

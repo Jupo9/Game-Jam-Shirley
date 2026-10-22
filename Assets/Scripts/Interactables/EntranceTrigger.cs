@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class EntranceTrigger : MonoBehaviour
 {
-    [Header("Entrance Indicator")]
+    /*[Header("Entrance Indicator")]
     [SerializeField] private Image entranceIndicator;
 
     [Header("Colors")]
@@ -63,5 +63,5 @@ public class EntranceTrigger : MonoBehaviour
         {
             entranceIndicator.color = inactiveColor;
         }
-    }
+    }*/
 }

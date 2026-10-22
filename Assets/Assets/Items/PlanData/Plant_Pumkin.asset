@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c202c796aec7cd44b7c160cddec5ca0, type: 3}
+  m_Name: Plant_Pumkin
+  m_EditorClassIdentifier: Assembly-CSharp::PlantData
+  seedItem: {fileID: 11400000, guid: ca3ff6f9b26e38345baa218174658e5a, type: 2}
+  harvestedItem: {fileID: 11400000, guid: e186387882cec834eb963258407d844d, type: 2}
+  harvestAmount: 1
+  requiredGrowthSlots: 5
+  growingPlantPrefab: {fileID: 8349569179705402693, guid: d5178858a10edfd429523687294cb735, type: 3}
