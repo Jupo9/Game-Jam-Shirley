@@ -1,47 +1,41 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>Main-hand icon plus general E-interaction indicator.</summary>
+[DisallowMultipleComponent]
+[AddComponentMenu("Game/UI/Equipped Item UI")]
 public class EquippedItemUI : MonoBehaviour
 {
     [Header("Equipped Item")]
-    [Tooltip("UI Image that displays the currently equipped item")]
-    [SerializeField] private Image equippedItemIcon;        //change this to Sprite!
+    [SerializeField] private Image equippedItemIcon;
 
-    [Header("Pickup Indicator")]
-    [Tooltip("Changes color when an item can be picked up")]
-    [SerializeField] private Image pickupIndicator;         //change this to Sprite!
-
-    [SerializeField] private Color canPickupColor = Color.green;
-    [SerializeField] private Color cannotPickupColor = Color.black;
+    [Header("General E Interaction Indicator")]
+    [SerializeField] private Image pickupIndicator;
+    [SerializeField] private Color canInteractColor = Color.green;
+    [SerializeField] private Color cannotInteractColor = Color.black;
 
     private void Awake()
     {
         SetEquippedItem(null);
-        SetPickupAvailable(false);
+        SetInteractionAvailable(false);
     }
 
     public void SetEquippedItem(ItemData item)
     {
-        if (item == null)
+        if (equippedItemIcon == null)
         {
-            equippedItemIcon.sprite = null;
-            equippedItemIcon.enabled = false;
             return;
         }
 
-        equippedItemIcon.sprite = item.ItemIcon;
-        equippedItemIcon.enabled = true;
+        equippedItemIcon.sprite = item != null ? item.ItemIcon : null;
+        equippedItemIcon.enabled = item != null && item.ItemIcon != null;
     }
 
-    public void SetPickupAvailable(bool canPickup)
+    public void SetInteractionAvailable(bool available)
     {
-        if (canPickup)
+        if (pickupIndicator != null)
         {
-            pickupIndicator.color = canPickupColor;
-        }
-        else
-        {
-            pickupIndicator.color = cannotPickupColor;
+            pickupIndicator.color = available ? canInteractColor : cannotInteractColor;
         }
     }
 }

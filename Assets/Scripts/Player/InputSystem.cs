@@ -13,91 +13,44 @@ public class InputSystem : MonoBehaviour
 
     [Header("Building Entrance Configs")]
     [Tooltip("Home Container")]
-    [SerializeField] private GameObject homeUI;
-
-    [Tooltip("Player stays on entrance Y/N")]
-    [SerializeField] private bool staysOnEntrance = false;
+    [SerializeField] private GameUIManager uiManager;
 
     private bool activeUI = false;
 
-    private void Start()
+    private void Awake()
     {
-        if (homeUI != null)
+        if (playerItemController == null)
         {
-            homeUI.SetActive(false);
+            playerItemController = GetComponent<PlayerItemController>();
         }
     }
 
     private void Update()
     {
-        HandlePlayerMovement();
-        HandlePlayerEntranceInteraction();
-        HandlePlayerItemInteraction();
-    }
-
-    private void HandlePlayerMovement()
-    {
-        Vector3 movementDirection = Vector3.zero;
-
-        if (Keyboard.current.wKey.isPressed || Keyboard.current.upArrowKey.isPressed)
+        Keyboard keyboard = Keyboard.current;
+        if (keyboard == null || (uiManager != null && uiManager.IsOpen))
         {
-            movementDirection -= Vector3.forward;
-        }
-        if (Keyboard.current.sKey.isPressed || Keyboard.current.downArrowKey.isPressed)
-        {
-            movementDirection -= Vector3.back;
-        }
-        if (Keyboard.current.aKey.isPressed || Keyboard.current.leftArrowKey.isPressed)
-        {
-            movementDirection -= Vector3.left;
-        }
-        if (Keyboard.current.dKey.isPressed || Keyboard.current.rightArrowKey.isPressed)
-        {
-            movementDirection -= Vector3.right;
-        }
-
-        transform.position += movementDirection * playerMovementSpeed * Time.deltaTime;
-    }
-
-    private void HandlePlayerEntranceInteraction()
-    {
-        if (Keyboard.current.eKey.isPressed && staysOnEntrance)
-        {
-            homeUI.SetActive(true);                 // has to chance for diffrent panels based on the entrance!
-            activeUI = true;
-            Time.timeScale = 0f;
-        }
-    }
-
-    private void HandlePlayerItemInteraction()
-    {
-        if (playerItemController == null)
-        {
-            Debug.Log("Return");
             return;
         }
 
-        if (Keyboard.current.fKey.wasPressedThisFrame)
-        {
-            Debug.Log("F Key was pressed");
-            playerItemController.TryPickupItem();
-        }
+        HandlePlayerMovement(keyboard);
 
-        if (Keyboard.current.gKey.wasPressedThisFrame)
+        if (keyboard.fKey.wasPressedThisFrame && playerItemController != null)
         {
-            Debug.Log("G Key was pressed");
             playerItemController.DropEquippedItem();
         }
     }
 
-    public void EnterEntranceTrigger()
+    private void HandlePlayerMovement(Keyboard keyboard)
     {
-        staysOnEntrance = true;
-    }
+        Vector3 movementDirection = Vector3.zero;
+        if (keyboard.dKey.isPressed || keyboard.rightArrowKey.isPressed) movementDirection += Vector3.forward;
+        if (keyboard.aKey.isPressed || keyboard.leftArrowKey.isPressed) movementDirection += Vector3.back;
+        if (keyboard.wKey.isPressed || keyboard.upArrowKey.isPressed) movementDirection += Vector3.left;
+        if (keyboard.sKey.isPressed || keyboard.downArrowKey.isPressed) movementDirection += Vector3.right;
 
-    public void ExitEntranceTrigger()
-    {
-        staysOnEntrance = false;
+        // Keep the movement behavior of the existing prototype.
+        transform.position += movementDirection * playerMovementSpeed * Time.deltaTime;
     }
 }
 
