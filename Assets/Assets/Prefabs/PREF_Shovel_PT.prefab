@@ -194,7 +194,7 @@ GameObject:
   - component: {fileID: 3683351373141437568}
   - component: {fileID: 1990470511512063826}
   m_Layer: 0
-  m_Name: Shovel_PT
+  m_Name: PREF_Shovel_PT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 183854144332066211}
   - component: {fileID: 8259674626007603639}
   m_Layer: 0
-  m_Name: Pumkin_PT
+  m_Name: PREF_Pumkin_PT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -164,15 +164,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1285309546271453315, guid: 861901edb3fbdb347a47b8bbc1dbe610, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1285309546271453315, guid: 861901edb3fbdb347a47b8bbc1dbe610, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1285309546271453315, guid: 861901edb3fbdb347a47b8bbc1dbe610, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -19.492256
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1285309546271453315, guid: 861901edb3fbdb347a47b8bbc1dbe610, type: 3}
       propertyPath: m_LocalRotation.w
@@ -180,15 +180,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1285309546271453315, guid: 861901edb3fbdb347a47b8bbc1dbe610, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1285309546271453315, guid: 861901edb3fbdb347a47b8bbc1dbe610, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1285309546271453315, guid: 861901edb3fbdb347a47b8bbc1dbe610, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1285309546271453315, guid: 861901edb3fbdb347a47b8bbc1dbe610, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

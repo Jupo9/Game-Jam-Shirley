@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7851520642283509254}
   - component: {fileID: 5736947676468856943}
   m_Layer: 0
-  m_Name: Bucket_PT
+  m_Name: PREF_Bucket_PT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

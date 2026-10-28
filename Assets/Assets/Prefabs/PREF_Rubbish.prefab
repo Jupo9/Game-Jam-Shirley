@@ -404,7 +404,7 @@ GameObject:
   - component: {fileID: 2400527330283106498}
   - component: {fileID: 6241681650875762078}
   m_Layer: 0
-  m_Name: Rubbish
+  m_Name: PREF_Rubbish
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
